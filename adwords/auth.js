@@ -2,6 +2,7 @@
 
 var google = require('googleapis');
 var OAuth2 = google.auth.OAuth2;
+var _      = require('lodash');
 
 class AdwordsAuth {
 
@@ -22,11 +23,10 @@ class AdwordsAuth {
      * @access public
      * @return {string} a URL to redirect to
      */
-    generateAuthenticationUrl() {
-        return this.oauth2Client.generateAuthUrl({
-            access_type: 'offline',
-            scope: 'https://www.googleapis.com/auth/adwords'
-        });
+    generateAuthenticationUrl(opts) {
+        return this.oauth2Client.generateAuthUrl(_.assign({
+            scope : ['https://www.googleapis.com/auth/adwords' ]
+        }, opts ));
     }
 
     /**
